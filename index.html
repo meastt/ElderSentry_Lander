@@ -73,13 +73,13 @@
             z-index: -1;
         }
 
-        .bg-decoration.blue {
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+        .bg-decoration.orange {
+            background: var(--brand-gradient-shield);
             animation: float 20s ease-in-out infinite;
         }
 
-        .bg-decoration.green {
-            background: linear-gradient(135deg, var(--trust-green), var(--accent-cyan));
+        .bg-decoration.grey {
+            background: var(--brand-gradient-grey);
             animation: float 25s ease-in-out infinite reverse;
         }
 
@@ -348,14 +348,14 @@
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary-blue);
+            box-shadow: 0 10px 30px rgba(249, 102, 50, 0.15);
+            border-color: var(--brand-orange-light);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 700;
-            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            background: var(--brand-gradient-shield);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
