@@ -6,9 +6,11 @@
     <title>Support - Elder Sentry</title>
     <style>
         :root {
-            --primary-blue: #0066CC;
-            --primary-dark: #004999;
-            --trust-green: #34C759;
+            --brand-orange-light: #f96632;
+            --brand-orange-dark: #932105;
+            --brand-grey-light: #dfdfdf;
+            --brand-grey-dark: #606361;
+            --brand-gradient-shield: linear-gradient(135deg, #f96632 0%, #932105 100%);
             --neutral-100: #F5F5F7;
             --neutral-200: #E8E8ED;
             --neutral-800: #1D1D1F;
@@ -56,7 +58,10 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--primary-blue);
+            background: var(--brand-gradient-shield);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             text-decoration: none;
             display: flex;
             align-items: center;
@@ -64,15 +69,11 @@
         }
 
         .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            object-fit: contain;
         }
 
         .nav-links {
@@ -91,7 +92,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--primary-blue);
+            color: var(--brand-orange-light);
         }
 
         /* Hero Section */
@@ -105,7 +106,7 @@
         .support-hero h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            background: var(--brand-gradient-shield);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -152,7 +153,7 @@
         .support-icon {
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            background: var(--brand-gradient-shield);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -284,7 +285,7 @@
         .submit-button {
             width: 100%;
             padding: 1.25rem;
-            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            background: var(--brand-gradient-shield);
             color: white;
             border: none;
             border-radius: 12px;
@@ -296,7 +297,7 @@
 
         .submit-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 8px 25px rgba(249, 102, 50, 0.4);
         }
 
         .form-note {
@@ -384,7 +385,7 @@
     <nav class="header-nav">
         <div class="nav-container">
             <a href="/" class="logo">
-                <div class="logo-icon">ES</div>
+                <img src="icon.png" alt="Elder Sentry" class="logo-icon">
                 Elder Sentry
             </a>
             <ul class="nav-links">
