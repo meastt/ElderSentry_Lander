@@ -3,387 +3,907 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Elder Sentry</title>
+    <title>Privacy Policy - ElderSentry</title>
+    <link rel="icon" type="image/png" href="icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --brand-orange-light: #f96632;
-            --brand-orange-dark: #932105;
-            --brand-grey-light: #dfdfdf;
-            --brand-grey-dark: #606361;
-            --brand-gradient-shield: linear-gradient(135deg, #f96632 0%, #932105 100%);
-            --neutral-100: #F5F5F7;
-            --neutral-200: #E8E8ED;
-            --neutral-800: #1D1D1F;
-            --neutral-900: #000000;
-            --text-primary: #1D1D1F;
-            --text-secondary: #86868B;
-            --white: #FFFFFF;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: var(--white);
-            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
-            background-size: 20px 20px;
+        :root {
+            --primary-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
+            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --dark-bg: #0a0a0a;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.8);
+            --text-muted: rgba(255, 255, 255, 0.6);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 40px 80px rgba(0, 0, 0, 0.4);
         }
 
-        /* Header Navigation */
-        .header-nav {
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(247, 147, 30, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 40%, rgba(255, 71, 87, 0.05) 0%, transparent 50%);
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Navigation */
+        .navbar {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--neutral-200);
             z-index: 1000;
+            padding: 20px 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: var(--brand-gradient-shield);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 24px;
+            font-weight: 800;
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
-        .logo-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
-            flex-shrink: 0;
-            object-fit: contain;
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 40px;
             list-style: none;
-            align-items: center;
         }
 
         .nav-links a {
-            color: var(--text-primary);
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 400;
-            transition: color 0.2s ease;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
         .nav-links a:hover {
-            color: var(--brand-orange-light);
+            color: var(--text-primary);
         }
 
-        /* Main Content */
-        .content-wrapper {
-            margin-top: 80px;
-            padding: 4rem 2rem;
-            min-height: calc(100vh - 400px);
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
         }
 
-        .content-container {
-            max-width: 900px;
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 0 60px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1400px;
             margin: 0 auto;
+            padding: 0 40px;
         }
 
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: var(--brand-gradient-shield);
+        .hero-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .last-updated {
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            font-size: 0.95rem;
-        }
-
-        h2 {
-            font-size: 1.75rem;
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        h3 {
+        .hero-content .subtitle {
             font-size: 1.3rem;
-            margin-top: 2rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-        }
-
-        p {
-            margin-bottom: 1.5rem;
             color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-
-        ul {
-            margin-bottom: 1.5rem;
-            padding-left: 2rem;
-            color: var(--text-secondary);
-        }
-
-        ul li {
-            margin-bottom: 0.75rem;
-            line-height: 1.8;
-        }
-
-        .privacy-highlight {
-            background: var(--neutral-100);
-            padding: 2rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--brand-orange-light);
-            margin: 2rem 0;
-        }
-
-        .privacy-highlight p {
-            margin-bottom: 0;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--neutral-900);
-            color: var(--white);
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-container {
-            max-width: 1200px;
+            max-width: 700px;
             margin: 0 auto;
+            font-weight: 400;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            padding-left: 0;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s ease;
-            font-size: 0.95rem;
-        }
-
-        .footer-links a:hover {
-            color: var(--white);
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
+        .last-updated {
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 12px;
+            display: inline-block;
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        .footer-description {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: 0.95rem;
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 40px;
         }
 
+        /* Content Sections */
+        .content-section {
+            margin: 60px 0;
+        }
+
+        .section-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .section-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+        }
+
+        .section-content {
+            color: var(--text-muted);
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .section-content h3 {
+            color: var(--text-secondary);
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+        }
+
+        .section-content h4 {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+        }
+
+        .section-content ul, .section-content ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        .section-content li {
+            margin-bottom: 8px;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 107, 53, 0.1);
+            border: 1px solid rgba(255, 107, 53, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .highlight-box h4 {
+            color: rgba(255, 107, 53, 0.9);
+            margin-bottom: 12px;
+        }
+
+        .contact-info {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            margin: 60px 0;
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .contact-button {
+            background: var(--primary-gradient);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+            display: inline-block;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 32px;
+            margin: 40px 0;
+            position: sticky;
+            top: 120px;
+        }
+
+        .toc h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .toc li {
+            margin-bottom: 12px;
+        }
+
+        .toc a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 8px 0;
+            border-left: 3px solid transparent;
+            padding-left: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .toc a:hover {
+            color: var(--text-primary);
+            border-left-color: rgba(255, 107, 53, 0.5);
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 1.5rem; }
-            .nav-links { gap: 1rem; }
-            .nav-links a { font-size: 0.85rem; }
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .nav-container {
+                padding: 0 20px;
             }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-container {
+                padding: 0 20px;
+            }
+
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .section-card {
+                padding: 32px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .toc {
+                position: static;
+                margin: 20px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .section-card {
+                padding: 24px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6b35 50%, #f7931e 100%);
         }
     </style>
 </head>
 <body>
-    <!-- Header Navigation -->
-    <nav class="header-nav">
+    <div class="bg-animation"></div>
+    
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="nav-container">
-            <a href="/" class="logo">
-                <img src="icon.png" alt="Elder Sentry" class="logo-icon">
-                Elder Sentry
-            </a>
+            <div class="logo">
+                <img src="icon.png" alt="ElderSentry">
+                <span>ElderSentry</span>
+            </div>
             <ul class="nav-links">
-                <li><a href="/#features">Features</a></li>
-                <li><a href="/#how-it-works">How It Works</a></li>
-                <li><a href="/privacy.html">Privacy</a></li>
-                <li><a href="/support.html">Support</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#features">Features</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="support.html">Support</a></li>
+                <li><a href="privacy.html" class="active">Privacy</a></li>
             </ul>
+            <a href="index.html#cta" class="cta-button">Get Started</a>
         </div>
     </nav>
 
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Privacy Policy</h1>
+                <p class="subtitle">Your privacy and data security are our top priorities. Learn how we protect and handle your personal information.</p>
+                <div class="last-updated">
+                    <i class="fas fa-calendar-alt"></i> Last updated: December 1, 2024
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Main Content -->
-    <div class="content-wrapper">
-        <div class="content-container">
-            <h1>Privacy Policy</h1>
-            <p class="last-updated">Last Updated: October 1, 2025</p>
+    <div class="container">
+        <!-- Table of Contents -->
+        <div class="toc">
+            <h3>Table of Contents</h3>
+            <ul>
+                <li><a href="#introduction">1. Introduction</a></li>
+                <li><a href="#information-we-collect">2. Information We Collect</a></li>
+                <li><a href="#how-we-use-information">3. How We Use Information</a></li>
+                <li><a href="#information-sharing">4. Information Sharing</a></li>
+                <li><a href="#data-security">5. Data Security</a></li>
+                <li><a href="#your-rights">6. Your Rights</a></li>
+                <li><a href="#data-retention">7. Data Retention</a></li>
+                <li><a href="#children-privacy">8. Children's Privacy</a></li>
+                <li><a href="#changes-to-policy">9. Changes to This Policy</a></li>
+                <li><a href="#contact-us">10. Contact Us</a></li>
+            </ul>
+        </div>
 
-            <div class="privacy-highlight">
-                <p>🔒 Your privacy is our top priority. Elder Sentry analyzes messages to detect scams—that's it. We don't store your personal information or share your data with third parties.</p>
+        <!-- Introduction -->
+        <div class="content-section" id="introduction">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    1. Introduction
+                </h2>
+                <div class="section-content">
+                    <p>ElderSentry ("we," "our," or "us") is committed to protecting your privacy and the privacy of your loved ones. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our senior safety monitoring service.</p>
+                    
+                    <p>By using ElderSentry, you consent to the data practices described in this Privacy Policy. If you do not agree with the terms of this Privacy Policy, please do not access or use our service.</p>
+
+                    <div class="highlight-box">
+                        <h4>Our Privacy Promise</h4>
+                        <p>We will never sell your personal information to third parties. Your family's safety data is encrypted, secure, and used solely to provide you with the best possible monitoring and care services.</p>
+                    </div>
+                </div>
             </div>
+        </div>
 
-            <h2>Our Commitment to Your Privacy</h2>
-            <p>Elder Sentry is designed with privacy at its core. We understand that the messages you check may contain sensitive information, and we take our responsibility to protect your privacy seriously.</p>
+        <!-- Information We Collect -->
+        <div class="content-section" id="information-we-collect">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    2. Information We Collect
+                </h2>
+                <div class="section-content">
+                    <h3>Personal Information</h3>
+                    <p>We collect information you provide directly to us, such as:</p>
+                    <ul>
+                        <li>Name, email address, phone number, and contact information</li>
+                        <li>Emergency contact details and family member information</li>
+                        <li>Health information relevant to monitoring (medication schedules, medical conditions)</li>
+                        <li>Account credentials and preferences</li>
+                        <li>Payment and billing information</li>
+                    </ul>
 
-            <h2>Information We Process</h2>
-            <h3>Message Analysis</h3>
-            <p>When you use Elder Sentry to analyze a text message or email:</p>
-            <ul>
-                <li>The message content is processed by our AI system to detect potential scams</li>
-                <li>Analysis happens in real-time and the message is not permanently stored</li>
-                <li>We do not access, store, or share any personal information contained in the messages</li>
-                <li>Your contacts, phone numbers, and email addresses are never collected or stored</li>
-            </ul>
+                    <h3>Monitoring Data</h3>
+                    <p>To provide our safety monitoring services, we collect:</p>
+                    <ul>
+                        <li>Movement and activity patterns</li>
+                        <li>Environmental sensor data (temperature, lighting, etc.)</li>
+                        <li>Device usage and connectivity information</li>
+                        <li>Alert and notification data</li>
+                        <li>Health metrics and wellness indicators</li>
+                    </ul>
 
-            <h3>Usage Data</h3>
-            <p>To improve our service and ensure it works properly, we may collect limited, anonymous usage information:</p>
-            <ul>
-                <li>Number of scans performed (not the content of messages)</li>
-                <li>General scam type categories detected</li>
-                <li>App performance and crash data</li>
-                <li>Device type and iOS version (for compatibility purposes)</li>
-            </ul>
-
-            <h2>What We Do NOT Collect</h2>
-            <p>Elder Sentry does not collect, store, or have access to:</p>
-            <ul>
-                <li>Your contacts or address book</li>
-                <li>Your text message or email history</li>
-                <li>Personal identifying information</li>
-                <li>Financial information</li>
-                <li>Location data</li>
-                <li>Any data from messages you don't explicitly share with the app</li>
-            </ul>
-
-            <h2>How We Use Information</h2>
-            <p>The limited information we process is used exclusively to:</p>
-            <ul>
-                <li>Analyze messages for scam indicators when you request it</li>
-                <li>Provide you with scam detection results and explanations</li>
-                <li>Improve our AI detection capabilities (using anonymous, aggregated data only)</li>
-                <li>Ensure the app functions properly and fix technical issues</li>
-            </ul>
-
-            <h2>Data Sharing</h2>
-            <p>We do not sell, rent, or share your personal information with third parties. Period.</p>
-            <p>The only exception would be if required by law (such as a valid subpoena or court order), and we would notify you if legally permitted to do so.</p>
-
-            <h2>Data Security</h2>
-            <p>We implement industry-standard security measures to protect your information:</p>
-            <ul>
-                <li>All data transmission is encrypted using modern cryptographic protocols</li>
-                <li>Our servers and infrastructure follow security best practices</li>
-                <li>Access to systems is strictly limited and monitored</li>
-                <li>Regular security audits and updates</li>
-            </ul>
-
-            <h2>Your Rights</h2>
-            <p>You have the right to:</p>
-            <ul>
-                <li>Use Elder Sentry without creating an account or providing personal information</li>
-                <li>Stop using the app at any time</li>
-                <li>Request information about what data we have (which is minimal)</li>
-                <li>Request deletion of any data we may have</li>
-            </ul>
-
-            <h2>Children's Privacy</h2>
-            <p>Elder Sentry is designed for adults and does not knowingly collect information from children under 13 years of age.</p>
-
-            <h2>Changes to This Policy</h2>
-            <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on this page and updating the "Last Updated" date. We encourage you to review this policy periodically.</p>
-
-            <h2>Contact Us</h2>
-            <p>If you have any questions or concerns about this Privacy Policy or our privacy practices, please contact us:</p>
-            <p><strong>Email:</strong> <a href="mailto:support@eldersentry.com" style="color: var(--primary-blue); text-decoration: none;">support@eldersentry.com</a></p>
-
-            <div class="privacy-highlight" style="margin-top: 3rem;">
-                <p>Questions about privacy? We're here to help. Contact us at support@eldersentry.com anytime.</p>
+                    <h3>Technical Information</h3>
+                    <p>We automatically collect certain technical information:</p>
+                    <ul>
+                        <li>Device information (type, model, operating system)</li>
+                        <li>IP address and location data (with consent)</li>
+                        <li>App usage statistics and performance data</li>
+                        <li>Log files and error reports</li>
+                    </ul>
+                </div>
             </div>
+        </div>
+
+        <!-- How We Use Information -->
+        <div class="content-section" id="how-we-use-information">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    3. How We Use Information
+                </h2>
+                <div class="section-content">
+                    <p>We use the information we collect to:</p>
+                    
+                    <h4>Provide and Improve Our Services</h4>
+                    <ul>
+                        <li>Monitor senior safety and wellness</li>
+                        <li>Send alerts and notifications to family members</li>
+                        <li>Analyze patterns to detect potential issues</li>
+                        <li>Provide health insights and recommendations</li>
+                        <li>Improve our AI algorithms and monitoring accuracy</li>
+                    </ul>
+
+                    <h4>Communication and Support</h4>
+                    <ul>
+                        <li>Respond to your inquiries and provide customer support</li>
+                        <li>Send important service updates and notifications</li>
+                        <li>Conduct surveys and gather feedback</li>
+                        <li>Provide emergency assistance when needed</li>
+                    </ul>
+
+                    <h4>Security and Compliance</h4>
+                    <ul>
+                        <li>Protect against fraud and unauthorized access</li>
+                        <li>Ensure compliance with legal obligations</li>
+                        <li>Maintain system security and integrity</li>
+                        <li>Investigate and prevent potential safety issues</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Information Sharing -->
+        <div class="content-section" id="information-sharing">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-share-alt"></i>
+                    </div>
+                    4. Information Sharing
+                </h2>
+                <div class="section-content">
+                    <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following limited circumstances:</p>
+
+                    <h4>With Your Consent</h4>
+                    <p>We may share information with family members, caregivers, or healthcare providers when you explicitly authorize us to do so.</p>
+
+                    <h4>Emergency Situations</h4>
+                    <p>In case of emergency or when we believe someone's safety is at risk, we may share relevant information with emergency services, family members, or healthcare providers.</p>
+
+                    <h4>Service Providers</h4>
+                    <p>We may share information with trusted third-party service providers who assist us in operating our service, such as:</p>
+                    <ul>
+                        <li>Cloud storage and hosting providers</li>
+                        <li>Payment processing services</li>
+                        <li>Communication and notification services</li>
+                        <li>Data analytics and security services</li>
+                    </ul>
+
+                    <h4>Legal Requirements</h4>
+                    <p>We may disclose information if required by law, court order, or to protect our rights, property, or safety, or that of our users.</p>
+
+                    <div class="highlight-box">
+                        <h4>No Third-Party Marketing</h4>
+                        <p>We will never share your information with third parties for marketing purposes. Your privacy and trust are paramount to our mission.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Security -->
+        <div class="content-section" id="data-security">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    5. Data Security
+                </h2>
+                <div class="section-content">
+                    <p>We implement industry-standard security measures to protect your information:</p>
+
+                    <h4>Encryption</h4>
+                    <ul>
+                        <li>End-to-end encryption for all data transmission</li>
+                        <li>AES-256 encryption for data at rest</li>
+                        <li>Secure communication protocols (TLS 1.3)</li>
+                    </ul>
+
+                    <h4>Access Controls</h4>
+                    <ul>
+                        <li>Multi-factor authentication for administrative access</li>
+                        <li>Role-based access controls and permissions</li>
+                        <li>Regular security audits and penetration testing</li>
+                        <li>Employee training on data protection practices</li>
+                    </ul>
+
+                    <h4>Infrastructure Security</h4>
+                    <ul>
+                        <li>Secure cloud infrastructure with SOC 2 compliance</li>
+                        <li>Regular security updates and patches</li>
+                        <li>Intrusion detection and monitoring systems</li>
+                        <li>Backup and disaster recovery procedures</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h4>Continuous Monitoring</h4>
+                        <p>Our security team continuously monitors our systems 24/7 to detect and respond to any potential security threats or breaches.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Your Rights -->
+        <div class="content-section" id="your-rights">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-user-check"></i>
+                    </div>
+                    6. Your Rights
+                </h2>
+                <div class="section-content">
+                    <p>You have the following rights regarding your personal information:</p>
+
+                    <h4>Access and Portability</h4>
+                    <ul>
+                        <li>Request a copy of your personal information</li>
+                        <li>Export your data in a machine-readable format</li>
+                        <li>View what information we have about you</li>
+                    </ul>
+
+                    <h4>Correction and Updates</h4>
+                    <ul>
+                        <li>Correct inaccurate or incomplete information</li>
+                        <li>Update your personal details and preferences</li>
+                        <li>Modify monitoring settings and alerts</li>
+                    </ul>
+
+                    <h4>Deletion and Restriction</h4>
+                    <ul>
+                        <li>Request deletion of your personal information</li>
+                        <li>Restrict certain types of data processing</li>
+                        <li>Opt out of non-essential communications</li>
+                    </ul>
+
+                    <h4>Consent Management</h4>
+                    <ul>
+                        <li>Withdraw consent for data processing</li>
+                        <li>Change privacy preferences at any time</li>
+                        <li>Control who can access your monitoring data</li>
+                    </ul>
+
+                    <p>To exercise any of these rights, please contact us using the information provided in the Contact Us section below.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Retention -->
+        <div class="content-section" id="data-retention">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    7. Data Retention
+                </h2>
+                <div class="section-content">
+                    <p>We retain your information only as long as necessary to provide our services and comply with legal obligations:</p>
+
+                    <h4>Active Accounts</h4>
+                    <p>For active accounts, we retain your information for the duration of your subscription and for a reasonable period afterward to provide continued support.</p>
+
+                    <h4>Monitoring Data</h4>
+                    <ul>
+                        <li>Real-time monitoring data: Stored for immediate analysis and alerts</li>
+                        <li>Historical patterns: Retained for up to 2 years for trend analysis</li>
+                        <li>Health insights: Stored for up to 5 years for long-term health tracking</li>
+                    </ul>
+
+                    <h4>Account Deletion</h4>
+                    <p>When you delete your account, we will:</p>
+                    <ul>
+                        <li>Remove your personal information within 30 days</li>
+                        <li>Retain anonymized data for service improvement (no personal identifiers)</li>
+                        <li>Keep certain records as required by law (up to 7 years)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Children's Privacy -->
+        <div class="content-section" id="children-privacy">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    8. Children's Privacy
+                </h2>
+                <div class="section-content">
+                    <p>ElderSentry is designed for monitoring senior adults and is not intended for use by children under 13 years of age. We do not knowingly collect personal information from children under 13.</p>
+
+                    <p>If you are a parent or guardian and believe your child has provided us with personal information, please contact us immediately. We will take steps to remove such information from our systems.</p>
+
+                    <p>For users between 13 and 18 years of age, we require parental consent before collecting or processing any personal information.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Changes to Policy -->
+        <div class="content-section" id="changes-to-policy">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    9. Changes to This Policy
+                </h2>
+                <div class="section-content">
+                    <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technology, legal requirements, or other factors. When we make changes, we will:</p>
+
+                    <ul>
+                        <li>Post the updated policy on our website</li>
+                        <li>Update the "Last Updated" date at the top of this policy</li>
+                        <li>Notify you of material changes via email or app notification</li>
+                        <li>Provide a summary of key changes when significant updates are made</li>
+                    </ul>
+
+                    <p>We encourage you to review this Privacy Policy periodically to stay informed about how we protect your information.</p>
+
+                    <div class="highlight-box">
+                        <h4>Your Continued Use</h4>
+                        <p>Your continued use of ElderSentry after any changes to this Privacy Policy constitutes acceptance of those changes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="content-section" id="contact-us">
+            <div class="section-card">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    10. Contact Us
+                </h2>
+                <div class="section-content">
+                    <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
+
+                    <h4>Privacy Officer</h4>
+                    <p>ElderSentry Privacy Team<br>
+                    Email: privacy@eldersentry.com<br>
+                    Phone: 1-800-ELDER-SAFE<br>
+                    Address: 123 Safety Street, Care City, CC 12345</p>
+
+                    <h4>Data Protection Inquiries</h4>
+                    <p>For data protection requests, privacy concerns, or to exercise your rights, please email us at privacy@eldersentry.com with "Privacy Request" in the subject line.</p>
+
+                    <h4>Response Time</h4>
+                    <p>We will respond to all privacy inquiries within 30 days of receipt.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="contact-info">
+            <h3>Questions About Your Privacy?</h3>
+            <p>Our privacy team is here to help you understand how we protect your information and answer any questions you may have.</p>
+            <a href="support.html" class="contact-button">Contact Privacy Team</a>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Elder Sentry</h4>
-                    <p class="footer-description">AI-powered scam protection designed specifically for seniors. Simple, effective, and trustworthy.</p>
-                </div>
-                <div class="footer-section">
-                    <h4>Product</h4>
-                    <ul class="footer-links">
-                        <li><a href="/#features">Features</a></li>
-                        <li><a href="/#how-it-works">How It Works</a></li>
-                        <li><a href="#">Pricing</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul class="footer-links">
-                        <li><a href="/support.html">Help Center</a></li>
-                        <li><a href="mailto:support@eldersentry.com">Contact Us</a></li>
-                        <li><a href="/privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Perfect For</h4>
-                    <ul class="footer-links">
-                        <li>Seniors staying safe online</li>
-                        <li>Adult children helping parents</li>
-                        <li>Caregivers protecting clients</li>
-                        <li>Anyone getting suspicious messages</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Elder Sentry. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
+            } else {
+                navbar.style.background = 'rgba(10, 10, 10, 0.8)';
+            }
+        });
+
+        // Smooth scrolling for TOC links
+        document.querySelectorAll('.toc a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe section cards
+        document.querySelectorAll('.section-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
 </body>
 </html>
