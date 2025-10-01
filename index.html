@@ -10,6 +10,8 @@
             --primary-dark: #004999;
             --trust-green: #34C759;
             --warning-orange: #FF9500;
+            --accent-purple: #7B61FF;
+            --accent-cyan: #32D7E0;
             --neutral-100: #F5F5F7;
             --neutral-200: #E8E8ED;
             --neutral-800: #1D1D1F;
@@ -31,6 +33,52 @@
             color: var(--text-primary);
             background: var(--white);
             overflow-x: hidden;
+        }
+
+        /* Animated gradient background shapes */
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.05); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .bg-decoration {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .bg-decoration.blue {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .bg-decoration.green {
+            background: linear-gradient(135deg, var(--trust-green), var(--accent-cyan));
+            animation: float 25s ease-in-out infinite reverse;
         }
 
         /* Typography */
@@ -128,19 +176,31 @@
             padding: 6rem 2rem 4rem;
             background: linear-gradient(180deg, var(--neutral-100) 0%, var(--white) 100%);
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero-content {
             max-width: 900px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            animation: slideInUp 0.8s ease-out;
         }
 
         .hero h1 {
             margin-bottom: 1.5rem;
-            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple), var(--trust-green));
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
         }
 
         .hero-subtitle {
@@ -148,6 +208,7 @@
             color: var(--text-secondary);
             margin-bottom: 3rem;
             font-weight: 400;
+            animation: slideInUp 0.8s ease-out 0.2s both;
         }
 
         /* App Store Button */
@@ -164,11 +225,32 @@
             font-weight: 500;
             transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            animation: slideInUp 0.8s ease-out 0.4s both;
+        }
+
+        .app-store-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .app-store-button:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .app-store-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
         }
 
         .app-icon {
@@ -228,18 +310,47 @@
         }
 
         .stat-card {
-            background: var(--neutral-100);
+            background: linear-gradient(135deg, var(--white) 0%, var(--neutral-100) 100%);
             padding: 2.5rem 2rem;
             border-radius: 16px;
             text-align: center;
             border: 1px solid var(--neutral-200);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 102, 204, 0.1) 0%, transparent 70%);
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+
+        .stat-card:hover::before {
+            transform: scale(1);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-blue);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: 700;
-            color: var(--primary-blue);
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
+            position: relative;
         }
 
         .stat-label {
