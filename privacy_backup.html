@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - Elder Sentry</title>
+    <style>
+        :root {
+            --brand-orange-light: #f96632;
+            --brand-orange-dark: #932105;
+            --brand-grey-light: #dfdfdf;
+            --brand-grey-dark: #606361;
+            --brand-gradient-shield: linear-gradient(135deg, #f96632 0%, #932105 100%);
+            --neutral-100: #F5F5F7;
+            --neutral-200: #E8E8ED;
+            --neutral-800: #1D1D1F;
+            --neutral-900: #000000;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--white);
+            background-image: radial-gradient(circle, rgba(0, 0, 0, 0.06) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Header Navigation */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--neutral-200);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--brand-gradient-shield);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--brand-orange-light);
+        }
+
+        /* Main Content */
+        .content-wrapper {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            min-height: calc(100vh - 400px);
+        }
+
+        .content-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--brand-gradient-shield);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .last-updated {
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-size: 0.95rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+            color: var(--text-secondary);
+        }
+
+        ul li {
+            margin-bottom: 0.75rem;
+            line-height: 1.8;
+        }
+
+        .privacy-highlight {
+            background: var(--neutral-100);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--brand-orange-light);
+            margin: 2rem 0;
+        }
+
+        .privacy-highlight p {
+            margin-bottom: 0;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--neutral-900);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            padding-left: 0;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.5rem; }
+            .nav-links { gap: 1rem; }
+            .nav-links a { font-size: 0.85rem; }
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="icon.png" alt="Elder Sentry" class="logo-icon">
+                Elder Sentry
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#features">Features</a></li>
+                <li><a href="/#how-it-works">How It Works</a></li>
+                <li><a href="/privacy.html">Privacy</a></li>
+                <li><a href="/support.html">Support</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content-wrapper">
+        <div class="content-container">
+            <h1>Privacy Policy</h1>
+            <p class="last-updated">Last Updated: October 1, 2025</p>
+
+            <div class="privacy-highlight">
+                <p>🔒 Your privacy is our top priority. Elder Sentry analyzes messages to detect scams—that's it. We don't store your personal information or share your data with third parties.</p>
+            </div>
+
+            <h2>Our Commitment to Your Privacy</h2>
+            <p>Elder Sentry is designed with privacy at its core. We understand that the messages you check may contain sensitive information, and we take our responsibility to protect your privacy seriously.</p>
+
+            <h2>Information We Process</h2>
+            <h3>Message Analysis</h3>
+            <p>When you use Elder Sentry to analyze a text message or email:</p>
+            <ul>
+                <li>The message content is processed by our AI system to detect potential scams</li>
+                <li>Analysis happens in real-time and the message is not permanently stored</li>
+                <li>We do not access, store, or share any personal information contained in the messages</li>
+                <li>Your contacts, phone numbers, and email addresses are never collected or stored</li>
+            </ul>
+
+            <h3>Usage Data</h3>
+            <p>To improve our service and ensure it works properly, we may collect limited, anonymous usage information:</p>
+            <ul>
+                <li>Number of scans performed (not the content of messages)</li>
+                <li>General scam type categories detected</li>
+                <li>App performance and crash data</li>
+                <li>Device type and iOS version (for compatibility purposes)</li>
+            </ul>
+
+            <h2>What We Do NOT Collect</h2>
+            <p>Elder Sentry does not collect, store, or have access to:</p>
+            <ul>
+                <li>Your contacts or address book</li>
+                <li>Your text message or email history</li>
+                <li>Personal identifying information</li>
+                <li>Financial information</li>
+                <li>Location data</li>
+                <li>Any data from messages you don't explicitly share with the app</li>
+            </ul>
+
+            <h2>How We Use Information</h2>
+            <p>The limited information we process is used exclusively to:</p>
+            <ul>
+                <li>Analyze messages for scam indicators when you request it</li>
+                <li>Provide you with scam detection results and explanations</li>
+                <li>Improve our AI detection capabilities (using anonymous, aggregated data only)</li>
+                <li>Ensure the app functions properly and fix technical issues</li>
+            </ul>
+
+            <h2>Data Sharing</h2>
+            <p>We do not sell, rent, or share your personal information with third parties. Period.</p>
+            <p>The only exception would be if required by law (such as a valid subpoena or court order), and we would notify you if legally permitted to do so.</p>
+
+            <h2>Data Security</h2>
+            <p>We implement industry-standard security measures to protect your information:</p>
+            <ul>
+                <li>All data transmission is encrypted using modern cryptographic protocols</li>
+                <li>Our servers and infrastructure follow security best practices</li>
+                <li>Access to systems is strictly limited and monitored</li>
+                <li>Regular security audits and updates</li>
+            </ul>
+
+            <h2>Your Rights</h2>
+            <p>You have the right to:</p>
+            <ul>
+                <li>Use Elder Sentry without creating an account or providing personal information</li>
+                <li>Stop using the app at any time</li>
+                <li>Request information about what data we have (which is minimal)</li>
+                <li>Request deletion of any data we may have</li>
+            </ul>
+
+            <h2>Children's Privacy</h2>
+            <p>Elder Sentry is designed for adults and does not knowingly collect information from children under 13 years of age.</p>
+
+            <h2>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new policy on this page and updating the "Last Updated" date. We encourage you to review this policy periodically.</p>
+
+            <h2>Contact Us</h2>
+            <p>If you have any questions or concerns about this Privacy Policy or our privacy practices, please contact us:</p>
+            <p><strong>Email:</strong> <a href="mailto:support@eldersentry.com" style="color: var(--primary-blue); text-decoration: none;">support@eldersentry.com</a></p>
+
+            <div class="privacy-highlight" style="margin-top: 3rem;">
+                <p>Questions about privacy? We're here to help. Contact us at support@eldersentry.com anytime.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Elder Sentry</h4>
+                    <p class="footer-description">AI-powered scam protection designed specifically for seniors. Simple, effective, and trustworthy.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/#how-it-works">How It Works</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="/support.html">Help Center</a></li>
+                        <li><a href="mailto:support@eldersentry.com">Contact Us</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Perfect For</h4>
+                    <ul class="footer-links">
+                        <li>Seniors staying safe online</li>
+                        <li>Adult children helping parents</li>
+                        <li>Caregivers protecting clients</li>
+                        <li>Anyone getting suspicious messages</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Elder Sentry. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
