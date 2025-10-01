@@ -3,170 +3,786 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elder Sentry - Scam Text & Email Detector</title>
+    <title>Elder Sentry - AI-Powered Scam Protection for Seniors</title>
     <style>
+        :root {
+            --primary-blue: #0066CC;
+            --primary-dark: #004999;
+            --trust-green: #34C759;
+            --warning-orange: #FF9500;
+            --neutral-100: #F5F5F7;
+            --neutral-200: #E8E8ED;
+            --neutral-800: #1D1D1F;
+            --neutral-900: #000000;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
+            --white: #FFFFFF;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-primary);
+            background: var(--white);
+            overflow-x: hidden;
         }
-        
-        .container {
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 { font-size: 2.5rem; }
+        h3 { font-size: 1.75rem; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            h3 { font-size: 1.5rem; }
+        }
+
+        /* Header Navigation */
+        .header-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--neutral-200);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem 4rem;
+            background: linear-gradient(180deg, var(--neutral-100) 0%, var(--white) 100%);
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        /* App Store Button */
+        .app-store-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2.5rem;
+            background: var(--neutral-900);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .app-store-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-icon {
+            font-size: 1.5rem;
+        }
+
+        .button-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.1rem;
+        }
+
+        .button-text small {
+            font-size: 0.7rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        .button-text span {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 4rem;
+        }
+
+        .stats-intro h2 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .stats-intro p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--neutral-100);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--neutral-200);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .stat-source {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--white) 0%, var(--neutral-100) 100%);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+        }
+
+        .step-card {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .step-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            padding: 2rem;
+            background: var(--neutral-100);
+            border-radius: 16px;
+            border: 1px solid var(--neutral-200);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Scams Detection Section */
+        .scams-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(180deg, var(--neutral-100) 0%, var(--white) 100%);
+        }
+
+        .scams-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .scam-item {
+            padding: 1.5rem;
+            background: var(--white);
+            border-radius: 12px;
+            border: 1px solid var(--neutral-200);
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .scam-icon {
+            color: var(--warning-orange);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .scam-item p {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        /* Privacy Section */
+        .privacy-section {
+            padding: 5rem 2rem;
+            background: var(--white);
+        }
+
+        .privacy-content {
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
             text-align: center;
-            padding: 40px 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .privacy-badge {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--trust-green), var(--primary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            margin: 0 auto 2rem;
+        }
+
+        .privacy-content h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .privacy-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--trust-green));
+            text-align: center;
             color: white;
         }
-        
-        header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
+
+        .cta-content {
+            max-width: 700px;
+            margin: 0 auto;
         }
-        
-        header p {
-            font-size: 1.2em;
-        }
-        
-        .download-section {
-            text-align: center;
-            padding: 40px 0;
-            background: #f8f9fa;
-        }
-        
-        .app-store-badge {
-            display: inline-block;
-            margin: 20px 0;
-            padding: 15px 30px;
-            background: #000;
+
+        .cta-content h2 {
             color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-size: 1.1em;
+            margin-bottom: 1.5rem;
         }
-        
-        .app-store-badge:hover {
-            background: #333;
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
         }
-        
-        section {
-            padding: 40px 0;
+
+        .app-store-button.light {
+            background: var(--white);
+            color: var(--neutral-900);
         }
-        
-        h2 {
-            font-size: 2em;
-            margin-bottom: 20px;
-            color: #667eea;
+
+        .app-store-button.light:hover {
+            background: var(--neutral-100);
         }
-        
-        .faq-item {
-            margin-bottom: 25px;
-        }
-        
-        .faq-item h3 {
-            font-size: 1.3em;
-            margin-bottom: 10px;
-            color: #444;
-        }
-        
-        .faq-item p {
-            color: #666;
-            font-size: 1.05em;
-        }
-        
+
+        /* Footer */
         footer {
-            text-align: center;
-            padding: 30px 0;
-            background: #333;
-            color: white;
+            background: var(--neutral-900);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
         }
-        
-        footer a {
-            color: #667eea;
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
             text-decoration: none;
-            margin: 0 15px;
+            transition: color 0.2s ease;
+            font-size: 0.95rem;
         }
-        
-        footer a:hover {
-            text-decoration: underline;
+
+        .footer-links a:hover {
+            color: var(--white);
         }
-        
-        .coming-soon {
-            color: #999;
-            font-style: italic;
+
+        .footer-bottom {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 1.5rem 3rem;
+            }
+
+            .stats-grid,
+            .steps-grid,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Elder Sentry</h1>
-            <p>Tap once to know if a message is safe</p>
+    <!-- Header Navigation -->
+    <nav class="header-nav">
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <div class="logo-icon">ES</div>
+                Elder Sentry
+            </a>
+            <ul class="nav-links">
+                <li><a href="/#features">Features</a></li>
+                <li><a href="/#how-it-works">How It Works</a></li>
+                <li><a href="/privacy.html">Privacy</a></li>
+                <li><a href="/support.html">Support</a></li>
+            </ul>
         </div>
-    </header>
+    </nav>
 
-    <section class="download-section">
-        <div class="container">
-            <h2>Download Now</h2>
-            <a href="#" class="app-store-badge coming-soon">Coming Soon to App Store</a>
-            <p style="margin-top: 15px; color: #666;">iOS 15.0 or later required</p>
-        </div>
-    </section>
-
-    <section id="faq">
-        <div class="container">
-            <h2>Frequently Asked Questions</h2>
-            
-            <div class="faq-item">
-                <h3>How does Elder Sentry work?</h3>
-                <p>Simply tap the share button on any suspicious text or email, select Elder Sentry, and get an instant analysis. Our AI examines the message and tells you if it's safe or potentially a scam.</p>
-            </div>
-            
-            <div class="faq-item">
-                <h3>Is my data private?</h3>
-                <p>Yes. We analyze messages only to detect scams. We don't store your personal information or share your data with anyone.</p>
-            </div>
-            
-            <div class="faq-item">
-                <h3>How much does it cost?</h3>
-                <p>Elder Sentry offers free daily scans. Premium plans with unlimited checks are available for those who need them.</p>
-            </div>
-            
-            <div class="faq-item">
-                <h3>What types of scams can Elder Sentry detect?</h3>
-                <p>Elder Sentry detects phishing emails, fake bank alerts, lottery scams, tech support fraud, imposter scams, and many other common threats targeting seniors.</p>
-            </div>
-            
-            <div class="faq-item">
-                <h3>Do I need to be tech-savvy to use it?</h3>
-                <p>Not at all. Elder Sentry was designed to be simple - just one tap and you get a clear answer in plain language.</p>
-            </div>
-            
-            <div class="faq-item">
-                <h3>Can I use it for both texts and emails?</h3>
-                <p>Yes! Elder Sentry works with both text messages and emails on your iPhone.</p>
-            </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Protect Yourself from Scams with One Simple Tap</h1>
+            <p class="hero-subtitle">Is that text message really from your bank? Is that email legitimate? Elder Sentry gives you instant peace of mind.</p>
+            <a href="#" class="app-store-button">
+                <span class="app-icon"></span>
+                <div class="button-text">
+                    <small>Download on the</small>
+                    <span>App Store</span>
+                </div>
+            </a>
         </div>
     </section>
 
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="stats-container">
+            <div class="stats-intro">
+                <h2>The Growing Threat to Seniors</h2>
+                <p>Scammers are becoming more sophisticated, specifically targeting older adults with tactics designed to create panic and urgency.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">$3.4B</div>
+                    <div class="stat-label">Lost by seniors to scams annually in the U.S.</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$240M</div>
+                    <div class="stat-label">Lost to romance scams by those 60+ in 2023</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">58%</div>
+                    <div class="stat-label">Of tech support fraud victims are seniors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$17,117</div>
+                    <div class="stat-label">Average loss per tech support scam incident</div>
+                </div>
+            </div>
+            <p class="stat-source">Source: FBI Internet Crime Complaint Center, FTC Consumer Sentinel Network, 2023-2024</p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Three simple steps to verify any suspicious message</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>Open & Share</h3>
+                    <p>Open the suspicious text or email, tap the share button, and select Elder Sentry.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>Instant Analysis</h3>
+                    <p>Our AI analyzes the message in seconds, examining patterns, language, and red flags.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>Get Clear Answers</h3>
+                    <p>Receive a verdict with plain-language explanations and actionable steps to stay safe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>What You Get</h2>
+                <p>Powerful protection designed for simplicity</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Analysis</h3>
+                    <p>Get scam detection results with one tap. No waiting, no complexity—just quick, reliable answers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <h3>Clear Explanations</h3>
+                    <p>No confusing technical jargon. We explain why a message is suspicious in language anyone can understand.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚩</div>
+                    <h3>Red Flag Detection</h3>
+                    <p>Learn to spot warning signs yourself. We highlight specific red flags in each message you check.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Actionable Steps</h3>
+                    <p>Know exactly what to do next. Get clear guidance on handling scams and protecting yourself.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Works Everywhere</h3>
+                    <p>Analyze both text messages and emails right from your iPhone. One app for all suspicious messages.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Fraud Resources</h3>
+                    <p>Access resources for reporting fraud and getting help if you've been targeted by scammers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Common Scams Section -->
+    <section class="scams-section">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Common Scams We Detect</h2>
+                <p>Elder Sentry identifies a wide range of fraud tactics targeting seniors</p>
+            </div>
+            <div class="scams-grid">
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>Fake bank alerts asking for account information</p>
+                </div>
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>Phishing emails pretending to be from trusted companies</p>
+                </div>
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>Prize or lottery scam notifications</p>
+                </div>
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>IRS or Social Security imposters</p>
+                </div>
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>Tech support scams</p>
+                </div>
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>Family emergency scams</p>
+                </div>
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>Package delivery frauds</p>
+                </div>
+                <div class="scam-item">
+                    <span class="scam-icon">⚠️</span>
+                    <p>Medicare or insurance scams</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Section -->
+    <section class="privacy-section">
+        <div class="privacy-content">
+            <div class="privacy-badge">🔒</div>
+            <h2>Your Privacy is Protected</h2>
+            <p>Your messages stay private. We don't store your personal information or share your data with third parties.</p>
+            <p>Elder Sentry analyzes messages to detect scams—that's it. Your trust and security are our top priorities.</p>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Never Second-Guess a Suspicious Message Again</h2>
+            <p>Scammers are getting smarter, but so can you. Elder Sentry puts powerful AI protection in your pocket, ready whenever you need it.</p>
+            <a href="#" class="app-store-button light">
+                <span class="app-icon"></span>
+                <div class="button-text">
+                    <small>Download on the</small>
+                    <span>App Store</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2025 Elder Sentry. All rights reserved.</p>
-            <div style="margin-top: 15px;">
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/support">Support</a>
-                <a href="mailto:support@eldersentry.com">Contact Us</a>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Elder Sentry</h4>
+                    <p class="footer-description">AI-powered scam protection designed specifically for seniors. Simple, effective, and trustworthy.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Product</h4>
+                    <ul class="footer-links">
+                        <li><a href="/#features">Features</a></li>
+                        <li><a href="/#how-it-works">How It Works</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Support</h4>
+                    <ul class="footer-links">
+                        <li><a href="/support.html">Help Center</a></li>
+                        <li><a href="mailto:support@eldersentry.com">Contact Us</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Perfect For</h4>
+                    <ul class="footer-links">
+                        <li>Seniors staying safe online</li>
+                        <li>Adult children helping parents</li>
+                        <li>Caregivers protecting clients</li>
+                        <li>Anyone getting suspicious messages</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Elder Sentry. All rights reserved.</p>
             </div>
         </div>
     </footer>
