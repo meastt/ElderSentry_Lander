@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support - ElderSentry</title>
+    <title>Support Center - ElderSentry</title>
+    <meta name="description" content="Get help with ElderSentry. Find answers, contact support, and learn how to make the most of your senior safety monitoring system.">
     <link rel="icon" type="image/png" href="icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,775 +15,785 @@
         }
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
-            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --dark-bg: #0a0a0a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 40px 80px rgba(0, 0, 0, 0.4);
+            --primary-blue: #2563eb;
+            --primary-blue-light: #3b82f6;
+            --primary-blue-dark: #1e40af;
+            --accent-green: #10b981;
+            --bg-light: #ffffff;
+            --bg-gray: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--dark-bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-light);
             color: var(--text-primary);
             line-height: 1.6;
-            overflow-x: hidden;
+            font-size: 16px;
         }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
+        .skip-to-main {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            padding: 1rem 1.5rem;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0 0 0.5rem 0;
+        }
+
+        .skip-to-main:focus {
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(247, 147, 30, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(255, 71, 87, 0.05) 0%, transparent 50%);
-            animation: backgroundShift 20s ease-in-out infinite;
-        }
-
-        @keyframes backgroundShift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+            top: 0;
         }
 
         /* Navigation */
         .navbar {
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 2rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
         }
 
-        .logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-gradient);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--primary-blue);
         }
 
         .nav-links a.active {
-            color: var(--text-primary);
-        }
-
-        .nav-links a.active::after {
-            width: 100%;
+            color: var(--primary-blue);
+            font-weight: 600;
         }
 
         .cta-button {
-            background: var(--primary-gradient);
+            background: var(--primary-blue);
             color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+            font-size: 0.9375rem;
+            transition: all 0.2s;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.4);
+            background: var(--primary-blue-dark);
         }
 
-        /* Hero Section */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 73px;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            padding: 1.5rem;
+            z-index: 99;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu .nav-links {
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .mobile-menu .nav-links a {
+            padding: 0.75rem;
+            display: block;
+            border-radius: 0.5rem;
+            background: var(--bg-gray);
+        }
+
+        /* Hero */
         .hero {
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 120px 0 80px;
+            background: linear-gradient(180deg, var(--bg-gray) 0%, var(--bg-light) 100%);
+            padding: 4rem 1.5rem 3rem;
             text-align: center;
         }
 
-        .hero-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
-        .hero-content h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-content .subtitle {
-            font-size: 1.3rem;
+        .hero p {
+            font-size: 1.25rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
-            font-weight: 400;
         }
 
-        /* Container */
-        .container {
-            max-width: 1400px;
+        /* Main Content */
+        main {
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 3rem 1.5rem;
         }
 
-        /* Support Grid */
         .support-grid {
             display: grid;
             grid-template-columns: 1fr 2fr;
-            gap: 60px;
-            margin: 80px 0;
+            gap: 3rem;
+            margin-bottom: 4rem;
         }
 
         /* Contact Cards */
+        .contact-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
         .contact-cards {
             display: flex;
             flex-direction: column;
-            gap: 24px;
+            gap: 1rem;
         }
 
         .contact-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.2s;
         }
 
         .contact-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-blue-light);
         }
 
-        .contact-card-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-gradient);
-            border-radius: 16px;
+        .contact-card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-gray);
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 24px;
-            color: white;
+            font-size: 1.5rem;
+            color: var(--primary-blue);
         }
 
         .contact-card h3 {
-            font-size: 1.4rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
             color: var(--text-primary);
         }
 
         .contact-card p {
             color: var(--text-muted);
-            margin-bottom: 16px;
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
         }
 
-        .contact-card .contact-info {
-            color: var(--text-secondary);
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary-blue);
             font-weight: 500;
         }
 
-        /* FAQ Section */
-        .faq-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 48px;
+        .contact-info a {
+            color: var(--primary-blue);
+            text-decoration: none;
         }
 
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 40px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* FAQ Section */
+        .faq-section h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .faq-item {
-            border-bottom: 1px solid var(--border-color);
-            padding: 24px 0;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.2s;
         }
 
-        .faq-item:last-child {
-            border-bottom: none;
+        .faq-item:hover {
+            box-shadow: var(--shadow-sm);
         }
 
         .faq-question {
-            font-size: 1.2rem;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 1.25rem 1.5rem;
+            font-size: 1.0625rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin-bottom: 12px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: color 0.3s ease;
+            transition: background 0.2s;
         }
 
         .faq-question:hover {
-            color: rgba(255, 107, 53, 0.8);
+            background: var(--bg-gray);
         }
 
-        .faq-question::after {
-            content: '+';
-            font-size: 1.5rem;
+        .faq-question:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: -2px;
+        }
+
+        .faq-icon {
+            font-size: 1.25rem;
             color: var(--text-muted);
-            transition: transform 0.3s ease;
+            transition: transform 0.2s;
         }
 
-        .faq-question.active::after {
+        .faq-question.active .faq-icon {
             transform: rotate(45deg);
         }
 
         .faq-answer {
-            color: var(--text-muted);
-            line-height: 1.7;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            transition: max-height 0.3s ease-out;
         }
 
         .faq-answer.active {
-            max-height: 200px;
+            max-height: 500px;
+        }
+
+        .faq-answer-content {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-muted);
+            line-height: 1.7;
         }
 
         /* Help Categories */
         .help-categories {
-            margin: 80px 0;
+            margin-bottom: 4rem;
+        }
+
+        .help-categories h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: var(--text-primary);
         }
 
         .categories-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 32px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
 
         .category-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 32px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
             cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .category-card:hover::before {
-            transform: scaleX(1);
         }
 
         .category-card:hover {
             transform: translateY(-4px);
-            box-shadow: var(--shadow);
-            border-color: rgba(255, 107, 53, 0.3);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-blue-light);
         }
 
         .category-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-gradient);
-            border-radius: 16px;
+            width: 56px;
+            height: 56px;
+            background: var(--bg-gray);
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 24px;
-            color: white;
+            font-size: 1.75rem;
+            margin: 0 auto 1rem;
+            color: var(--primary-blue);
         }
 
         .category-card h3 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
             color: var(--text-primary);
         }
 
         .category-card p {
             color: var(--text-muted);
-            margin-bottom: 20px;
+            line-height: 1.5;
         }
 
-        .category-link {
-            color: rgba(255, 107, 53, 0.8);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .category-link:hover {
-            color: rgba(255, 107, 53, 1);
-        }
-
-        /* Status Section */
-        .status-section {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
-            border-radius: 24px;
-            padding: 48px;
-            text-align: center;
-            margin: 80px 0;
+        /* Status Banner */
+        .status-banner {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1px solid #6ee7b7;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
         }
 
         .status-indicator {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(76, 175, 80, 0.2);
-            border: 1px solid rgba(76, 175, 80, 0.3);
-            border-radius: 50px;
-            padding: 12px 24px;
-            margin-bottom: 24px;
-        }
-
-        .status-dot {
             width: 12px;
             height: 12px;
-            background: #4caf50;
+            background: var(--accent-green);
             border-radius: 50%;
-            animation: pulse 2s infinite;
+            animation: pulse-status 2s infinite;
         }
 
-        @keyframes pulse {
+        @keyframes pulse-status {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
 
-        .status-text {
-            color: #4caf50;
+        .status-banner p {
+            color: #065f46;
             font-weight: 600;
+            margin: 0;
         }
 
-        /* Mobile Responsive */
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .support-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 20px;
+            .mobile-menu-btn {
+                display: block;
             }
 
             .nav-links {
                 display: none;
             }
 
-            .hero-container {
-                padding: 0 20px;
+            .nav-container .cta-button {
+                display: none;
             }
 
-            .hero-content h1 {
-                font-size: 3rem;
+            .hero h1 {
+                font-size: 2rem;
             }
 
-            .container {
-                padding: 0 20px;
-            }
-
-            .support-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            .hero p {
+                font-size: 1.125rem;
             }
 
             .categories-grid {
                 grid-template-columns: 1fr;
-                gap: 24px;
-            }
-
-            .faq-section {
-                padding: 32px;
-            }
-
-            .section-title {
-                font-size: 2rem;
             }
         }
 
         @media (max-width: 480px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .hero h1 {
+                font-size: 1.75rem;
             }
-
-            .section-title {
-                font-size: 1.8rem;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-gradient);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #ff4757 0%, #ff6b35 50%, #f7931e 100%);
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
     
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="logo">
-                <img src="icon.png" alt="ElderSentry">
+            <a href="index.html" class="logo" aria-label="ElderSentry Home">
+                <div class="logo-icon">🛡️</div>
                 <span>ElderSentry</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#features">Features</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="support.html" class="active">Support</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
+            </a>
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="index.html#features" role="menuitem">Features</a></li>
+                <li role="none"><a href="index.html#how-it-works" role="menuitem">How it Works</a></li>
+                <li role="none"><a href="support.html" role="menuitem" class="active">Support</a></li>
+                <li role="none"><a href="privacy.html" role="menuitem">Privacy</a></li>
             </ul>
-            <a href="index.html#cta" class="cta-button">Get Started</a>
+            <a href="index.html#waitlist" class="cta-button">Join Waitlist</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+                ☰
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <div class="hero-content">
-                <h1>Support Center</h1>
-                <p class="subtitle">We're here to help you every step of the way</p>
-            </div>
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="nav-links" role="menubar">
+            <li role="none"><a href="index.html#features" role="menuitem">Features</a></li>
+            <li role="none"><a href="index.html#how-it-works" role="menuitem">How it Works</a></li>
+            <li role="none"><a href="support.html" role="menuitem" class="active">Support</a></li>
+            <li role="none"><a href="privacy.html" role="menuitem">Privacy</a></li>
+        </ul>
+        <a href="index.html#waitlist" class="cta-button">Join Waitlist</a>
+    </div>
+
+    <!-- Hero -->
+    <header class="hero">
+        <h1>How Can We Help?</h1>
+        <p>Find answers, get support, and learn how to make the most of ElderSentry</p>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Status Banner -->
+        <div class="status-banner">
+            <div class="status-indicator" aria-hidden="true"></div>
+            <p>🎉 We're in development! Beta launching 2026. Join the waitlist for early access.</p>
         </div>
-    </section>
 
-    <!-- Support Grid -->
-    <div class="container">
         <div class="support-grid">
-            <!-- Contact Cards -->
-            <div class="contact-cards">
-                <div class="contact-card">
-                    <div class="contact-card-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>24/7 Support</h3>
-                    <p>Round-the-clock assistance from our expert team</p>
-                    <div class="contact-info">support@eldersentry.com</div>
-                </div>
+            <!-- Contact Section -->
+            <aside class="contact-section">
+                <h2>Get in Touch</h2>
+                <div class="contact-cards">
+                    <article class="contact-card">
+                        <div class="contact-card-header">
+                            <div class="contact-icon">📧</div>
+                            <h3>Email Us</h3>
+                        </div>
+                        <p>General inquiries and support</p>
+                        <div class="contact-info">
+                            <span>→</span>
+                            <a href="mailto:hello@eldersentry.com">hello@eldersentry.com</a>
+                        </div>
+                    </article>
 
-                <div class="contact-card">
-                    <div class="contact-card-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <h3>Emergency Line</h3>
-                    <p>Immediate assistance for urgent situations</p>
-                    <div class="contact-info">1-800-ELDER-SAFE</div>
-                </div>
+                    <article class="contact-card">
+                        <div class="contact-card-header">
+                            <div class="contact-icon">💬</div>
+                            <h3>Beta Program</h3>
+                        </div>
+                        <p>Interested in early access?</p>
+                        <div class="contact-info">
+                            <span>→</span>
+                            <a href="mailto:beta@eldersentry.com">beta@eldersentry.com</a>
+                        </div>
+                    </article>
 
-                <div class="contact-card">
-                    <div class="contact-card-icon">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <h3>Live Chat</h3>
-                    <p>Instant help through our chat system</p>
-                    <div class="contact-info">Available 24/7</div>
-                </div>
+                    <article class="contact-card">
+                        <div class="contact-card-header">
+                            <div class="contact-icon">🏥</div>
+                            <h3>Partnerships</h3>
+                        </div>
+                        <p>Healthcare & senior living inquiries</p>
+                        <div class="contact-info">
+                            <span>→</span>
+                            <a href="mailto:partners@eldersentry.com">partners@eldersentry.com</a>
+                        </div>
+                    </article>
 
-                <div class="contact-card">
-                    <div class="contact-card-icon">
-                        <i class="fas fa-calendar-alt"></i>
-                    </div>
-                    <h3>Schedule Call</h3>
-                    <p>Book a convenient time for a personal consultation</p>
-                    <div class="contact-info">Book Online</div>
+                    <article class="contact-card">
+                        <div class="contact-card-header">
+                            <div class="contact-icon">🔒</div>
+                            <h3>Privacy & Security</h3>
+                        </div>
+                        <p>Data protection questions</p>
+                        <div class="contact-info">
+                            <span>→</span>
+                            <a href="mailto:privacy@eldersentry.com">privacy@eldersentry.com</a>
+                        </div>
+                    </article>
                 </div>
-            </div>
+            </aside>
 
             <!-- FAQ Section -->
-            <div class="faq-section">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-                
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        How do I set up ElderSentry for my loved one?
-                    </div>
-                    <div class="faq-answer">
-                        Setting up ElderSentry is simple and takes less than 15 minutes. Download our mobile app, create an account, and follow the guided setup process. Our support team is available 24/7 to assist with installation and configuration.
-                    </div>
-                </div>
+            <section class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-list">
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            When will ElderSentry be available?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                We're currently in development and planning a beta launch in 2026. Join our waitlist to be notified when we open beta testing to select families. Early waitlist members will get priority access and special launch pricing.
+                            </div>
+                        </div>
+                    </article>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        What devices are compatible with ElderSentry?
-                    </div>
-                    <div class="faq-answer">
-                        ElderSentry works with smartphones, tablets, smart watches, and our dedicated monitoring devices. We support iOS 12+, Android 8+, and provide hardware options for homes without smart devices.
-                    </div>
-                </div>
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            How does fall detection work?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Our wearable device uses advanced accelerometer and gyroscope sensors to detect sudden movements consistent with falls. When a fall is detected, the system immediately sends alerts to all designated family members via SMS and app notifications, and can initiate two-way voice communication.
+                            </div>
+                        </div>
+                    </article>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        How does the AI monitoring work?
-                    </div>
-                    <div class="faq-answer">
-                        Our AI analyzes daily patterns, movement, medication schedules, and environmental factors to detect anomalies. It learns your loved one's normal routine and alerts you to any concerning changes or potential emergencies.
-                    </div>
-                </div>
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            What devices are compatible with ElderSentry?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Family members can use our mobile app on iOS (iPhone 8 and newer) or Android (version 9.0 and up) devices. The senior wears our custom monitoring device—no smartphone required. Setup takes less than 5 minutes with our guided app instructions.
+                            </div>
+                        </div>
+                    </article>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Is my family's data secure and private?
-                    </div>
-                    <div class="faq-answer">
-                        Absolutely. We use enterprise-grade encryption, secure cloud storage, and follow strict privacy protocols. Your data is never shared with third parties, and you have full control over what information is collected and stored.
-                    </div>
-                </div>
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            Will there be monthly fees?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                We're planning a one-time device purchase with no monthly subscription fees. All features—including fall detection, medication reminders, family notifications, and activity monitoring—will be included. Final pricing will be announced closer to launch.
+                            </div>
+                        </div>
+                    </article>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        What if there's a false alarm?
-                    </div>
-                    <div class="faq-answer">
-                        Our AI is designed to minimize false alarms through advanced pattern recognition. If an alert is triggered, you'll receive immediate notification with context, and you can quickly verify the situation through our app's live monitoring features.
-                    </div>
-                </div>
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            Is my family's data private and secure?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Absolutely. We use end-to-end encryption for all data transmission, and all health information is stored securely on your family's devices with encrypted cloud backup. We never sell data to third parties, and you have complete control over who can access your loved one's information. Read our full <a href="privacy.html">Privacy Policy</a> for details.
+                            </div>
+                        </div>
+                    </article>
 
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFAQ(this)">
-                        Can multiple family members access the system?
-                    </div>
-                    <div class="faq-answer">
-                        Yes! ElderSentry supports multiple family members and caregivers. You can invite family members, set different permission levels, and ensure everyone stays informed about your loved one's wellbeing.
-                    </div>
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            Can multiple family members receive alerts?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes! You can add unlimited family members and caregivers to receive alerts. Each person can customize their notification preferences (SMS, app, email) and set quiet hours. You can also designate primary and secondary contacts for different types of alerts.
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            What happens if the device battery dies?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                The device has a 7-day battery life under normal use. When the battery drops below 20%, all family members receive low-battery alerts. The device continues working until completely drained, giving plenty of time to charge. We also send weekly charging reminders via the app.
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
+                            Does ElderSentry work outside the home?
+                            <span class="faq-icon" aria-hidden="true">+</span>
+                        </button>
+                        <div class="faq-answer">
+                            <div class="faq-answer-content">
+                                Yes! The device has built-in cellular connectivity, so fall detection and alerts work anywhere with cell coverage—at home, in the yard, at the store, or visiting friends. GPS location is shared with family members during alerts so they know exactly where help is needed.
+                            </div>
+                        </div>
+                    </article>
                 </div>
-            </div>
+            </section>
         </div>
 
         <!-- Help Categories -->
-        <div class="help-categories">
-            <h2 class="section-title">Help Categories</h2>
+        <section class="help-categories">
+            <h2>Browse Help Topics</h2>
             <div class="categories-grid">
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-cog"></i>
-                    </div>
-                    <h3>Setup & Installation</h3>
-                    <p>Get started with ElderSentry and configure your monitoring system</p>
-                    <a href="#" class="category-link">View Guides →</a>
-                </div>
+                <article class="category-card">
+                    <div class="category-icon">📦</div>
+                    <h3>Getting Started</h3>
+                    <p>Setup guides, device pairing, and initial configuration</p>
+                </article>
 
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
+                <article class="category-card">
+                    <div class="category-icon">📱</div>
                     <h3>Mobile App</h3>
-                    <p>Learn how to use our mobile application effectively</p>
-                    <a href="#" class="category-link">View Guides →</a>
-                </div>
+                    <p>Using the family app, notifications, and settings</p>
+                </article>
 
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>Security & Privacy</h3>
-                    <p>Understand our security measures and privacy policies</p>
-                    <a href="#" class="category-link">View Guides →</a>
-                </div>
+                <article class="category-card">
+                    <div class="category-icon">🔔</div>
+                    <h3>Alerts & Monitoring</h3>
+                    <p>Understanding alerts, customizing notifications</p>
+                </article>
 
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-                    <h3>Alerts & Notifications</h3>
-                    <p>Configure and manage your alert preferences</p>
-                    <a href="#" class="category-link">View Guides →</a>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Reports & Analytics</h3>
-                    <p>Interpret health insights and wellness reports</p>
-                    <a href="#" class="category-link">View Guides →</a>
-                </div>
-
-                <div class="category-card">
-                    <div class="category-icon">
-                        <i class="fas fa-tools"></i>
-                    </div>
+                <article class="category-card">
+                    <div class="category-icon">🔧</div>
                     <h3>Troubleshooting</h3>
-                    <p>Common issues and how to resolve them</p>
-                    <a href="#" class="category-link">View Guides →</a>
-                </div>
-            </div>
-        </div>
+                    <p>Common issues, connectivity, and device care</p>
+                </article>
 
-        <!-- System Status -->
-        <div class="status-section">
-            <div class="status-indicator">
-                <div class="status-dot"></div>
-                <span class="status-text">All Systems Operational</span>
+                <article class="category-card">
+                    <div class="category-icon">🔋</div>
+                    <h3>Device Care</h3>
+                    <p>Charging, cleaning, and maintenance tips</p>
+                </article>
+
+                <article class="category-card">
+                    <div class="category-icon">👥</div>
+                    <h3>Family Accounts</h3>
+                    <p>Adding members, permissions, and sharing access</p>
+                </article>
             </div>
-            <h3 style="color: var(--text-primary); margin-bottom: 16px;">System Status</h3>
-            <p style="color: var(--text-muted);">Our monitoring systems are running smoothly. Check back here for any service updates or maintenance notifications.</p>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <script>
-        // FAQ Toggle Function
-        function toggleFAQ(element) {
-            const answer = element.nextElementSibling;
-            const isActive = element.classList.contains('active');
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            const isActive = menu.classList.contains('active');
+            
+            menu.classList.toggle('active');
+            btn.setAttribute('aria-expanded', !isActive);
+        }
+
+        function toggleFAQ(button) {
+            const answer = button.nextElementSibling;
+            const isActive = button.classList.contains('active');
             
             // Close all other FAQs
             document.querySelectorAll('.faq-question').forEach(q => {
-                q.classList.remove('active');
-                q.nextElementSibling.classList.remove('active');
+                if (q !== button) {
+                    q.classList.remove('active');
+                    q.setAttribute('aria-expanded', 'false');
+                    q.nextElementSibling.classList.remove('active');
+                }
             });
             
             // Toggle current FAQ
-            if (!isActive) {
-                element.classList.add('active');
-                answer.classList.add('active');
-            }
+            button.classList.toggle('active');
+            button.setAttribute('aria-expanded', !isActive);
+            answer.classList.toggle('active');
         }
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.8)';
-            }
-        });
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Keyboard support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mobile-menu');
+                const btn = document.querySelector('.mobile-menu-btn');
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.focus();
                 }
-            });
-        }, observerOptions);
-
-        // Observe cards
-        document.querySelectorAll('.contact-card, .category-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
+            }
         });
     </script>
 </body>

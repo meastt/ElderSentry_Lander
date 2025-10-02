@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ElderSentry - Advanced Senior Safety Technology</title>
+    <title>ElderSentry - Fall Detection & Safety Monitoring for Seniors</title>
+    <meta name="description" content="24/7 fall detection and safety monitoring for seniors. Automatic emergency alerts, medication reminders, and family notifications.">
     <link rel="icon" type="image/png" href="icon.png">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -15,489 +15,627 @@
         }
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
-            --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --dark-bg: #0a0a0a;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
-            --text-muted: rgba(255, 255, 255, 0.6);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 40px 80px rgba(0, 0, 0, 0.4);
+            /* Calming, trustworthy colors */
+            --primary-blue: #2563eb;
+            --primary-blue-light: #3b82f6;
+            --primary-blue-dark: #1e40af;
+            --accent-green: #10b981;
+            --accent-green-light: #34d399;
+            
+            /* High-contrast, accessible colors */
+            --bg-light: #ffffff;
+            --bg-gray: #f8fafc;
+            --bg-gray-dark: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --border: #cbd5e1;
+            
+            /* Semantic colors */
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+        }
+
+        /* Reduce motion for users who prefer it */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: var(--dark-bg);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--bg-light);
             color: var(--text-primary);
             line-height: 1.6;
+            font-size: 16px;
             overflow-x: hidden;
         }
 
-        /* Animated Background */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 20% 80%, rgba(255, 107, 53, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(247, 147, 30, 0.1) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 40%, rgba(255, 71, 87, 0.05) 0%, transparent 50%);
-            animation: backgroundShift 20s ease-in-out infinite;
+        /* Skip to main content for accessibility */
+        .skip-to-main {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            padding: 1rem 1.5rem;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 0 0 0.5rem 0;
         }
 
-        @keyframes backgroundShift {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+        .skip-to-main:focus {
+            left: 0;
+            top: 0;
         }
 
         /* Navigation */
         .navbar {
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 20px 0;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 1rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 2rem;
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 24px;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            gap: 0.75rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            text-decoration: none;
         }
 
-        .logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 12px;
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 2rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
             color: var(--text-secondary);
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
-            position: relative;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--primary-blue);
+            outline: none;
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary-gradient);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
+        .nav-links a:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 4px;
+            border-radius: 4px;
         }
 
         .cta-button {
-            background: var(--primary-gradient);
+            background: var(--primary-blue);
             color: white;
-            padding: 12px 24px;
-            border-radius: 12px;
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
             text-decoration: none;
             font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3);
+            font-size: 0.9375rem;
+            transition: all 0.2s;
+            border: 2px solid var(--primary-blue);
         }
 
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.4);
+        .cta-button:hover,
+        .cta-button:focus {
+            background: var(--primary-blue-dark);
+            border-color: var(--primary-blue-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .cta-button:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+        }
+
+        .mobile-menu-btn:focus-visible {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 73px;
+            left: 0;
+            right: 0;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            box-shadow: var(--shadow-lg);
+            padding: 1.5rem;
+            z-index: 99;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu .nav-links {
+            flex-direction: column;
+            gap: 1rem;
+            align-items: stretch;
+        }
+
+        .mobile-menu .nav-links a {
+            padding: 0.75rem;
+            display: block;
+            border-radius: 0.5rem;
+            background: var(--bg-gray);
+        }
+
+        .mobile-menu .cta-button {
+            display: block;
+            text-align: center;
+            margin-top: 1rem;
         }
 
         /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            padding: 120px 0 80px;
+            padding: 4rem 1.5rem;
+            background: linear-gradient(180deg, var(--bg-gray) 0%, var(--bg-light) 100%);
         }
 
         .hero-container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 40px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
+            gap: 4rem;
             align-items: center;
         }
 
         .hero-content h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
         }
 
         .hero-content .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             color: var(--text-secondary);
-            margin-bottom: 40px;
-            font-weight: 400;
+            margin-bottom: 2rem;
+            line-height: 1.6;
         }
 
         .hero-content .description {
-            font-size: 1.2rem;
+            font-size: 1.125rem;
             color: var(--text-muted);
-            margin-bottom: 48px;
+            margin-bottom: 2rem;
             line-height: 1.7;
+        }
+
+        /* Beta badge */
+        .beta-badge {
+            display: inline-block;
+            background: var(--accent-green-light);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
 
         .hero-actions {
             display: flex;
-            gap: 24px;
-            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
         }
 
         .primary-btn {
-            background: var(--primary-gradient);
+            background: var(--primary-blue);
             color: white;
-            padding: 18px 36px;
-            border-radius: 16px;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 12px 32px rgba(255, 107, 53, 0.3);
-            position: relative;
-            overflow: hidden;
+            font-size: 1.0625rem;
+            transition: all 0.2s;
+            border: 2px solid var(--primary-blue);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .primary-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .primary-btn:hover::before {
-            left: 100%;
-        }
-
-        .primary-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 48px rgba(255, 107, 53, 0.4);
+        .primary-btn:hover,
+        .primary-btn:focus {
+            background: var(--primary-blue-dark);
+            border-color: var(--primary-blue-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
 
         .secondary-btn {
-            background: transparent;
-            color: var(--text-primary);
-            padding: 18px 36px;
-            border: 2px solid var(--border-color);
-            border-radius: 16px;
+            background: white;
+            color: var(--primary-blue);
+            padding: 1rem 2rem;
+            border: 2px solid var(--primary-blue);
+            border-radius: 0.5rem;
             text-decoration: none;
             font-weight: 600;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            font-size: 1.0625rem;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
-        .secondary-btn:hover {
-            border-color: rgba(255, 107, 53, 0.5);
-            background: rgba(255, 107, 53, 0.1);
+        .secondary-btn:hover,
+        .secondary-btn:focus {
+            background: var(--bg-gray);
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .hero-visual {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .hero-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 32px;
-            padding: 48px;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            overflow: hidden;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        .hero-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-        }
-
-        .feature-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 32px;
-            margin-top: 32px;
+            gap: 1rem;
         }
 
-        .feature-item {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+        .feature-card-small {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            transition: all 0.2s;
         }
 
-        .feature-item:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
+        .feature-card-small:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
         }
 
-        .feature-icon {
+        .feature-icon-small {
             width: 48px;
             height: 48px;
-            background: var(--primary-gradient);
-            border-radius: 12px;
+            background: var(--bg-gray);
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
-        .feature-text {
-            color: var(--text-secondary);
-            font-weight: 500;
+        .feature-card-small h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
         }
 
-        /* Features Section */
-        .features {
-            padding: 120px 0;
-            background: linear-gradient(180deg, transparent 0%, rgba(255, 107, 53, 0.03) 100%);
+        .feature-card-small p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* Main Content */
+        main {
+            padding: 4rem 1.5rem;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 40px;
+        }
+
+        .section {
+            margin-bottom: 6rem;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 80px;
+            margin-bottom: 3rem;
         }
 
         .section-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
         }
 
         .section-subtitle {
-            font-size: 1.3rem;
+            font-size: 1.125rem;
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
         }
 
+        /* Features Grid */
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 40px;
-            margin-top: 80px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
         .feature-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 48px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .feature-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--primary-gradient);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover::before {
-            transform: scaleX(1);
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 1rem;
+            padding: 2rem;
+            transition: all 0.2s;
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
-            border-color: rgba(255, 107, 53, 0.3);
+            border-color: var(--primary-blue-light);
         }
 
-        .feature-card-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--primary-gradient);
-            border-radius: 20px;
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--bg-gray);
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 32px;
-            font-size: 32px;
-            color: white;
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
         }
 
         .feature-card h3 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
             color: var(--text-primary);
         }
 
         .feature-card p {
             color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
-        /* Stats Section */
+        /* How it Works */
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .step {
+            text-align: center;
+        }
+
+        .step-number {
+            width: 56px;
+            height: 56px;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+
+        .step h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+
+        .step p {
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Stats */
         .stats {
-            padding: 80px 0;
-            background: rgba(255, 107, 53, 0.05);
+            background: var(--bg-gray);
+            border-radius: 1.5rem;
+            padding: 3rem 2rem;
+            margin: 4rem 0;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 48px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
             text-align: center;
         }
 
-        .stat-item h3 {
-            font-size: 3rem;
-            font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
+        .stat h3 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 0.5rem;
         }
 
-        .stat-item p {
+        .stat p {
+            font-size: 1rem;
             color: var(--text-secondary);
-            font-size: 1.1rem;
             font-weight: 500;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--bg-gray);
+            padding: 4rem 1.5rem;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .testimonial-text {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-gray);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: var(--primary-blue);
+        }
+
+        .author-info h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .author-info p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
         }
 
         /* CTA Section */
         .cta-section {
-            padding: 120px 0;
+            background: var(--primary-blue);
+            color: white;
+            border-radius: 1.5rem;
+            padding: 4rem 2rem;
             text-align: center;
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
+            margin: 4rem 0;
         }
 
-        .cta-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .cta-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
-        .cta-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .cta-section p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
         }
 
-        .cta-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-secondary);
-            margin-bottom: 48px;
+        .cta-section .primary-btn {
+            background: white;
+            color: var(--primary-blue);
+            border-color: white;
+        }
+
+        .cta-section .primary-btn:hover {
+            background: var(--bg-gray);
+        }
+
+        .cta-section .secondary-btn {
+            background: transparent;
+            color: white;
+            border-color: white;
+        }
+
+        .cta-section .secondary-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
         }
 
         /* Footer */
         .footer {
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid var(--border-color);
-            padding: 80px 0 40px;
+            background: var(--bg-gray);
+            padding: 3rem 1.5rem 2rem;
+            border-top: 1px solid var(--border);
         }
 
         .footer-content {
+            max-width: 1280px;
+            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
         }
 
         .footer-section h4 {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 24px;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
             color: var(--text-primary);
         }
 
@@ -506,376 +644,445 @@
         }
 
         .footer-section ul li {
-            margin-bottom: 12px;
+            margin-bottom: 0.5rem;
         }
 
         .footer-section ul li a {
             color: var(--text-muted);
             text-decoration: none;
-            transition: color 0.3s ease;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
         }
 
-        .footer-section ul li a:hover {
-            color: var(--text-primary);
+        .footer-section ul li a:hover,
+        .footer-section ul li a:focus {
+            color: var(--primary-blue);
         }
 
         .footer-bottom {
-            border-top: 1px solid var(--border-color);
-            padding-top: 40px;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
             text-align: center;
             color: var(--text-muted);
+            font-size: 0.875rem;
         }
 
         /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .hero-visual {
+                order: -1;
+            }
+        }
+
         @media (max-width: 768px) {
-            .nav-container {
-                padding: 0 20px;
+            .mobile-menu-btn {
+                display: block;
             }
 
             .nav-links {
                 display: none;
             }
 
-            .hero-container {
-                grid-template-columns: 1fr;
-                gap: 60px;
-                padding: 0 20px;
+            .nav-container .cta-button {
+                display: none;
+            }
+
+            .hero {
+                padding: 3rem 1.5rem;
             }
 
             .hero-content h1 {
-                font-size: 3rem;
+                font-size: 2rem;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.125rem;
             }
 
             .hero-actions {
                 flex-direction: column;
-                align-items: stretch;
             }
 
-            .container {
-                padding: 0 20px;
+            .primary-btn,
+            .secondary-btn {
+                width: 100%;
+                justify-content: center;
             }
 
             .section-title {
-                font-size: 2.5rem;
+                font-size: 1.75rem;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
-                gap: 32px;
             }
 
-            .feature-card {
-                padding: 32px;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 32px;
-            }
-
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            main {
+                padding: 3rem 1.5rem;
             }
         }
 
         @media (max-width: 480px) {
             .hero-content h1 {
-                font-size: 2.5rem;
+                font-size: 1.75rem;
             }
 
             .section-title {
-                font-size: 2rem;
+                font-size: 1.5rem;
             }
 
-            .cta-title {
-                font-size: 2.5rem;
-            }
-
-            .stats-grid {
+            .hero-visual {
                 grid-template-columns: 1fr;
             }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--dark-bg);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-gradient);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(135deg, #ff4757 0%, #ff6b35 50%, #f7931e 100%);
         }
     </style>
 </head>
 <body>
-    <div class="bg-animation"></div>
+    <!-- Skip to main content for screen readers -->
+    <a href="#main-content" class="skip-to-main">Skip to main content</a>
     
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
-            <div class="logo">
-                <img src="icon.png" alt="ElderSentry">
+            <a href="index.html" class="logo" aria-label="ElderSentry Home">
+                <div class="logo-icon">🛡️</div>
                 <span>ElderSentry</span>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="support.html">Support</a></li>
-                <li><a href="privacy.html">Privacy</a></li>
+            </a>
+            <ul class="nav-links" role="menubar">
+                <li role="none"><a href="#features" role="menuitem">Features</a></li>
+                <li role="none"><a href="#how-it-works" role="menuitem">How it Works</a></li>
+                <li role="none"><a href="support.html" role="menuitem">Support</a></li>
+                <li role="none"><a href="privacy.html" role="menuitem">Privacy</a></li>
             </ul>
-            <a href="#cta" class="cta-button">Get Started</a>
+            <a href="#waitlist" class="cta-button">Join Waitlist</a>
+            <button class="mobile-menu-btn" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+                ☰
+            </button>
         </div>
     </nav>
 
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobile-menu" role="navigation" aria-label="Mobile navigation">
+        <ul class="nav-links" role="menubar">
+            <li role="none"><a href="#features" role="menuitem">Features</a></li>
+            <li role="none"><a href="#how-it-works" role="menuitem">How it Works</a></li>
+            <li role="none"><a href="support.html" role="menuitem">Support</a></li>
+            <li role="none"><a href="privacy.html" role="menuitem">Privacy</a></li>
+        </ul>
+        <a href="#waitlist" class="cta-button">Join Waitlist</a>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero">
+    <header class="hero">
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Advanced Senior Safety Technology</h1>
-                <p class="subtitle">Protecting what matters most with intelligent monitoring</p>
+                <span class="beta-badge">Coming Soon - Beta 2026</span>
+                <h1>Fall Detection & Safety Monitoring for Your Loved Ones</h1>
+                <p class="subtitle">
+                    Automatic fall alerts, medication reminders, and 24/7 family notifications—all from one simple device.
+                </p>
                 <p class="description">
-                    ElderSentry combines cutting-edge AI technology with compassionate care to ensure your loved ones are safe, monitored, and supported 24/7. Experience peace of mind like never before.
+                    ElderSentry uses wearable sensors to detect falls instantly, track daily activities, and alert your family when something's wrong. Simple setup, no monthly fees, complete privacy.
                 </p>
                 <div class="hero-actions">
-                    <a href="#cta" class="primary-btn">Start Free Trial</a>
-                    <a href="#features" class="secondary-btn">Learn More</a>
+                    <a href="#waitlist" class="primary-btn">
+                        Join the Waitlist
+                        <span aria-hidden="true">→</span>
+                    </a>
+                    <a href="#features" class="secondary-btn">
+                        Learn More
+                        <span aria-hidden="true">↓</span>
+                    </a>
                 </div>
             </div>
             <div class="hero-visual">
-                <div class="hero-card">
-                    <div class="feature-grid">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-shield-alt"></i>
-                            </div>
-                            <span class="feature-text">24/7 Protection</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-brain"></i>
-                            </div>
-                            <span class="feature-text">AI-Powered</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-heart"></i>
-                            </div>
-                            <span class="feature-text">Family Peace</span>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
-                            <span class="feature-text">Easy Setup</span>
-                        </div>
+                <div class="feature-card-small">
+                    <div class="feature-icon-small">🚨</div>
+                    <h3>Fall Detection</h3>
+                    <p>Instant alerts when a fall is detected</p>
+                </div>
+                <div class="feature-card-small">
+                    <div class="feature-icon-small">💊</div>
+                    <h3>Medication Reminders</h3>
+                    <p>Never miss a dose with smart alerts</p>
+                </div>
+                <div class="feature-card-small">
+                    <div class="feature-icon-small">👨‍👩‍👧‍👦</div>
+                    <h3>Family Notifications</h3>
+                    <p>Keep everyone in the loop instantly</p>
+                </div>
+                <div class="feature-card-small">
+                    <div class="feature-icon-small">🔒</div>
+                    <h3>Private & Secure</h3>
+                    <p>Your data stays in your family</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <div class="container">
+            <!-- Features Section -->
+            <section id="features" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Everything You Need for Peace of Mind</h2>
+                    <p class="section-subtitle">
+                        Simple, effective features designed specifically for seniors and their families
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">🏥</div>
+                        <h3>Automatic Fall Detection</h3>
+                        <p>Advanced sensors detect falls and immediately alert your emergency contacts via SMS and phone call. No button press needed—help is on the way automatically.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">📱</div>
+                        <h3>Real-Time Family Dashboard</h3>
+                        <p>See daily activity summaries, medication adherence, and location updates. Everyone in the family stays connected through our simple mobile app.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">⏰</div>
+                        <h3>Smart Medication Tracking</h3>
+                        <p>Gentle reminders for medication times. Track when doses are taken and get alerts if a dose is missed. Share logs with doctors at appointments.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🔋</div>
+                        <h3>7-Day Battery Life</h3>
+                        <p>Lightweight wearable device that charges weekly. Low battery alerts ensure it's always ready. Water-resistant for shower safety.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">🏠</div>
+                        <h3>Activity Monitoring</h3>
+                        <p>Track daily routines like waking up, meals, and bedtime. Unusual patterns trigger wellness check-in alerts to family members.</p>
+                    </article>
+                    <article class="feature-card">
+                        <div class="feature-icon">💬</div>
+                        <h3>Two-Way Voice Communication</h3>
+                        <p>Built-in speaker and microphone let your loved one talk directly to emergency contacts after an alert. Quick reassurance or faster help coordination.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- How It Works -->
+            <section id="how-it-works" class="section">
+                <div class="section-header">
+                    <h2 class="section-title">Simple Setup, Powerful Protection</h2>
+                    <p class="section-subtitle">
+                        Get started in minutes, not hours
+                    </p>
+                </div>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>Receive Your Device</h3>
+                        <p>Pre-configured wearable arrives ready to use. Just charge and wear—no technical setup required.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>Download the App</h3>
+                        <p>Family members install our free app on their phones. Simple 5-minute setup with guided instructions.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>Stay Protected 24/7</h3>
+                        <p>ElderSentry works in the background. You live normally, we watch for problems, and family gets instant alerts.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stats-grid">
+                    <div class="stat">
+                        <h3>&lt; 5min</h3>
+                        <p>Average Setup Time</p>
+                    </div>
+                    <div class="stat">
+                        <h3>24/7</h3>
+                        <p>Continuous Monitoring</p>
+                    </div>
+                    <div class="stat">
+                        <h3>7 Days</h3>
+                        <p>Battery Life</p>
+                    </div>
+                    <div class="stat">
+                        <h3>$0/mo</h3>
+                        <p>No Monthly Fees (Planned)</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
+        <!-- Testimonials -->
+        <section class="testimonials" aria-label="Customer testimonials">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Trusted by Families Like Yours</h2>
+                </div>
+            </div>
+            <div class="testimonial-grid">
+                <article class="testimonial">
+                    <p class="testimonial-text">
+                        "We're excited to be part of the beta program. The fall detection concept gives us peace of mind knowing Mom has that extra layer of protection."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SR</div>
+                        <div class="author-info">
+                            <h4>Sarah R.</h4>
+                            <p>Beta Tester</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="testimonial">
+                    <p class="testimonial-text">
+                        "As a caregiver, having all the family connected through one app is a game-changer. No more group texts trying to coordinate care."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <h4>Michael J.</h4>
+                            <p>Early Adopter</p>
+                        </div>
+                    </div>
+                </article>
+                <article class="testimonial">
+                    <p class="testimonial-text">
+                        "The setup was incredibly simple. My 78-year-old mother put on the device and it just worked. No complicated tech to explain."
+                    </p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LK</div>
+                        <div class="author-info">
+                            <h4>Linda K.</h4>
+                            <p>Beta Tester</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Why Choose ElderSentry?</h2>
-                <p class="section-subtitle">
-                    Advanced technology meets compassionate care to deliver unparalleled senior safety monitoring
+            <section id="waitlist" class="cta-section">
+                <h2>Ready to Protect Your Loved Ones?</h2>
+                <p>
+                    Join our waitlist to be notified when ElderSentry launches in 2026. Early members get exclusive beta access and special pricing.
                 </p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3>Intelligent Monitoring</h3>
-                    <p>Advanced AI algorithms continuously analyze behavior patterns and environmental conditions to detect potential issues before they become emergencies.</p>
+                <div class="hero-actions" style="justify-content: center;">
+                    <a href="mailto:hello@eldersentry.com?subject=Waitlist%20Request" class="primary-btn">
+                        Join the Waitlist
+                    </a>
+                    <a href="support.html" class="secondary-btn">
+                        Contact Us
+                    </a>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-bell"></i>
-                    </div>
-                    <h3>Instant Alerts</h3>
-                    <p>Receive immediate notifications via SMS, email, or app alerts when our system detects any unusual activity or potential safety concerns.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>Family Connected</h3>
-                    <p>Keep the entire family informed and connected with real-time updates, shared calendars, and collaborative care planning tools.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <h3>Health Insights</h3>
-                    <p>Track wellness trends, medication adherence, and daily activities to provide comprehensive health insights for better care decisions.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-lock"></i>
-                    </div>
-                    <h3>Privacy First</h3>
-                    <p>Your family's privacy is our top priority with enterprise-grade security, encrypted data transmission, and secure cloud storage.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-card-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3>24/7 Support</h3>
-                    <p>Round-the-clock customer support from our dedicated team of senior care specialists and technical experts.</p>
-                </div>
-            </div>
+            </section>
         </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>99.9%</h3>
-                    <p>System Uptime</p>
-                </div>
-                <div class="stat-item">
-                    <h3>50K+</h3>
-                    <p>Families Protected</p>
-                </div>
-                <div class="stat-item">
-                    <h3>24/7</h3>
-                    <p>Monitoring Coverage</p>
-                </div>
-                <div class="stat-item">
-                    <h3>98%</h3>
-                    <p>Customer Satisfaction</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" id="cta">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">Ready to Protect Your Loved Ones?</h2>
-                <p class="cta-subtitle">
-                    Join thousands of families who trust ElderSentry for their senior safety needs. Start your free trial today.
-                </p>
-                <div class="hero-actions">
-                    <a href="#" class="primary-btn">Start Free Trial</a>
-                    <a href="support.html" class="secondary-btn">Contact Sales</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Product</h4>
-                    <ul>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#pricing">Pricing</a></li>
-                        <li><a href="#security">Security</a></li>
-                        <li><a href="#integration">Integrations</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Support</h4>
-                    <ul>
-                        <li><a href="support.html">Help Center</a></li>
-                        <li><a href="support.html">Contact Us</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#status">System Status</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h4>Legal</h4>
-                    <ul>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                        <li><a href="#terms">Terms of Service</a></li>
-                        <li><a href="#cookies">Cookie Policy</a></li>
-                        <li><a href="#gdpr">GDPR</a></li>
-                    </ul>
-                </div>
+    <footer class="footer" role="contentinfo">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Product</h4>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how-it-works">How it Works</a></li>
+                    <li><a href="#waitlist">Pricing</a></li>
+                    <li><a href="support.html">FAQ</a></li>
+                </ul>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 ElderSentry. All rights reserved. Protecting families, one day at a time.</p>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="support.html">About Us</a></li>
+                    <li><a href="support.html">Contact</a></li>
+                    <li><a href="support.html">Careers</a></li>
+                    <li><a href="support.html">Press Kit</a></li>
+                </ul>
             </div>
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="support.html">Help Center</a></li>
+                    <li><a href="support.html">Contact Support</a></li>
+                    <li><a href="support.html">Device Setup</a></li>
+                    <li><a href="support.html">Troubleshooting</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="privacy.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Data Security</a></li>
+                    <li><a href="privacy.html">Accessibility</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 ElderSentry. Launching 2026. Protecting families with dignity and care.</p>
         </div>
     </footer>
 
     <script>
-        // Smooth scrolling for navigation links
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const btn = document.querySelector('.mobile-menu-btn');
+            const isActive = menu.classList.contains('active');
+            
+            menu.classList.toggle('active');
+            btn.setAttribute('aria-expanded', !isActive);
+            
+            // Close menu when clicking a link
+            if (!isActive) {
+                const links = menu.querySelectorAll('a');
+                links.forEach(link => {
+                    link.addEventListener('click', () => {
+                        menu.classList.remove('active');
+                        btn.setAttribute('aria-expanded', 'false');
+                    });
+                });
+            }
+        }
+
+        // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                const href = this.getAttribute('href');
+                if (href !== '#' && href !== '#waitlist') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             });
         });
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const navbar = document.querySelector('.navbar');
-            if (window.scrollY > 100) {
-                navbar.style.background = 'rgba(10, 10, 10, 0.95)';
-            } else {
-                navbar.style.background = 'rgba(10, 10, 10, 0.8)';
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                const menu = document.getElementById('mobile-menu');
+                const btn = document.querySelector('.mobile-menu-btn');
+                if (menu.classList.contains('active')) {
+                    menu.classList.remove('active');
+                    btn.setAttribute('aria-expanded', 'false');
+                    btn.focus();
+                }
             }
-        });
-
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe feature cards
-        document.querySelectorAll('.feature-card').forEach(card => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
-            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(card);
-        });
-
-        // Observe stats
-        document.querySelectorAll('.stat-item').forEach(stat => {
-            stat.style.opacity = '0';
-            stat.style.transform = 'translateY(30px)';
-            stat.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(stat);
         });
     </script>
 </body>
