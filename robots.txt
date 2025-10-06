@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://eldersentry.com/sitemap.xml
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block access to backup files
+Disallow: /*_backup.html
+Disallow: /*.backup
+
+# Allow all other content
+Allow: /index.html
+Allow: /privacy.html
+Allow: /support.html
+Allow: /icon.png
